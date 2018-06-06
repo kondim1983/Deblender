@@ -15,10 +15,10 @@ for i=1:repl
         % Multiplicative update 
     %     calculate h
         numer = w0'*a;
-        h = h0 .* (numer ./ ((w0'*w0)*h0 + eps(numer)));
+        h = max(0,h0 .* (numer ./ ((w0'*w0)*h0 + eps(numer))));
     %     calculate w
         numer = a*h';
-        w = w0 .* (numer ./ (w0*(h*h') + eps(numer)));
+        w = max(0,w0 .* (numer ./ (w0*(h*h') + eps(numer))));
 
     % Get norm of difference and max change in factors
         dnorm = sqrt(sum(sum((a-w*h).^2))/(n*m));
